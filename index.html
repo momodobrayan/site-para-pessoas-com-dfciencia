@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Acessível - Educação e Cidadania</title>
+  <style>
+    /* Variáveis de cores padrão (Modo Claro) */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #1a1a1a;
+      --primary-color: #004494;
+      --primary-text: #ffffff;
+      --border-color: #cccccc;
+      --focus-outline: #ff9900;
+      --base-font-size: 18px;
+    }
+
+    /* Variáveis de Alto Contraste */
+    body.high-contrast {
+      --bg-color: #000000;
+      --text-color: #ffff00;
+      --primary-color: #ffff00;
+      --primary-text: #000000;
+      --border-color: #ffff00;
+      --focus-outline: #00ffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-size: var(--base-font-size);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Destaque visível para navegação via teclado (Tab) */
+    a:focus, button:focus {
+      outline: 4px solid var(--focus-outline);
+      outline-offset: 2px;
+    }
+
+    /* Link "Pular para o conteúdo" (aparece ao apertar Tab) */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 10px;
+      background: var(--primary-color);
+      color: var(--primary-text);
+      padding: 12px;
+      font-weight: bold;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    /* Barra de Acessibilidade */
+    .accessibility-bar {
+      background-color: var(--bg-color);
+      border-bottom: 2px solid var(--border-color);
+      padding: 12px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: var(--primary-text);
+      border: 2px solid var(--border-color);
+      padding: 10px 16px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    header, main, footer {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: var(--text-color);
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    article {
+      border: 2px solid var(--border-color);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 6px;
+    }
+
+    footer {
+      border-top: 2px solid var(--border-color);
+      margin-top: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Atalho para usuários de leitor de tela irem direto ao texto -->
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Barra de ferramentas de acessibilidade -->
+  <div class="accessibility-bar" role="region" aria-label="Barra de ferramentas de acessibilidade">
+    <button type="button" onclick="alterarFonte(2)" aria-label="Aumentar tamanho da letra">A+</button>
+    <button type="button" onclick="alterarFonte(-2)" aria-label="Diminuir tamanho da letra">A-</button>
+    <button type="button" onclick="alternarContraste()" aria-pressed="false" id="btn-contraste">Alto Contraste</button>
+    <button type="button" onclick="lerTexto()" id="btn-leitura">🔊 Ouvir Texto</button>
+    <button type="button" onclick="pararLeitura()">⏹ Parar Áudio</button>
+  </div>
+
+  <header>
+    <h1>Portal Inclusivo</h1>
+    <nav aria-label="Menu principal">
+      <ul>
+        <li><a href="#artigo-1">Sobre a Acessibilidade</a></li>
+        <li><a href="#artigo-2">Dicas de Navegação</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo-principal" tabindex="-1">
+    <article id="artigo-1">
+      <h2>Navegação Pensada para Todos</h2>
+      <p>
+        Este site foi desenvolvido seguindo as diretrizes internacionais de acessibilidade (WCAG). 
+        Ele possui estrutura semântica clara para leitores de tela, contraste ajustável para pessoas com baixa visão 
+        e controles simples que funcionam totalmente pelo teclado.
+      </p>
+    </article>
+
+    <article id="artigo-2">
+      <h2>Como usar os recursos</h2>
+      <ul>
+        <li><strong>Tecla Tab:</strong> Navegue entre botões e links com destaque visual claro.</li>
+        <li><strong>Botões A+ e A-:</strong> Aumente ou diminua o tamanho das letras conforme sua necessidade.</li>
+        <li><strong>Alto Contraste:</strong> Altera as cores para fundo preto com texto amarelo, reduzindo o cansaço visual.</li>
+        <li><strong>Ouvir Texto:</strong> O navegador lê o conteúdo principal em voz alta em português.</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer>
+    <p>Desenvolvido com foco em acessibilidade digital.</p>
+  </footer>
+
+  <script>
+    // Controle de tamanho da fonte
+    let tamanhoAtual = 18;
+    function alterarFonte(valor) {
+      tamanhoAtual += valor;
+      if (tamanhoAtual < 14) tamanhoAtual = 14;
+      if (tamanhoAtual > 32) tamanhoAtual = 32;
+      document.documentElement.style.setProperty('--base-font-size', tamanhoAtual + 'px');
+    }
+
+    // Controle de Alto Contraste
+    function alternarContraste() {
+      const body = document.body;
+      const btn = document.getElementById('btn-contraste');
+      body.classList.toggle('high-contrast');
+      const ativo = body.classList.contains('high-contrast');
+      btn.setAttribute('aria-pressed', ativo);
+    }
+
+    // Leitura em voz alta (Web Speech API)
+    function lerTexto() {
+      pararLeitura(); // Evita sobreposição de áudios
+      const texto = document.getElementById('conteudo-principal').innerText;
+      const fala = new SpeechSynthesisUtterance(texto);
+      fala.lang = 'pt-BR';
+      fala.rate = 1.0; // Velocidade normal
+      window.speechSynthesis.speak(fala);
+    }
+
+    function pararLeitura() {
+      window.speechSynthesis.cancel();
+    }
+  </script>
+
+</body>
+</html>
