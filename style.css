@@ -1,0 +1,215 @@
+/* ==========================================================
+   1. VARIÁVEIS DE CORES E TIPOGRAFIA (MODO CLARO PADRÃO)
+   ========================================================== */
+:root {
+  --bg-color: #f4f6f9;
+  --surface-color: #ffffff;
+  --text-color: #1a1a1a;
+  --primary-color: #004494;
+  --primary-hover: #002d62;
+  --primary-text: #ffffff;
+  --border-color: #b0b8c1;
+  --focus-outline: #ff9900;
+  --base-font-size: 18px;
+}
+
+/* ==========================================================
+   2. MODO ALTO CONTRASTE (ATIVADO PELO BOTÃO)
+   ========================================================== */
+body.high-contrast {
+  --bg-color: #000000;
+  --surface-color: #000000;
+  --text-color: #ffff00;
+  --primary-color: #ffff00;
+  --primary-hover: #e6e600;
+  --primary-text: #000000;
+  --border-color: #ffff00;
+  --focus-outline: #00ffff;
+}
+
+/* ==========================================================
+   3. RESET E ESTILOS GERAIS
+   ========================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: var(--base-font-size);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding: 0;
+}
+
+/* Destaque de foco altamente visível para teclado (Tab) */
+a:focus,
+button:focus,
+main:focus {
+  outline: 4px solid var(--focus-outline);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   4. ATALHO "PULAR PARA O CONTEÚDO" (SKIP LINK)
+   ========================================================== */
+.skip-link {
+  position: absolute;
+  top: -120px;
+  left: 16px;
+  background-color: var(--primary-color);
+  color: var(--primary-text);
+  padding: 14px 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 2px solid var(--border-color);
+  z-index: 1000;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ==========================================================
+   5. BARRA SUPERIOR DE ACESSIBILIDADE
+   ========================================================== */
+.accessibility-bar {
+  background-color: var(--surface-color);
+  border-bottom: 3px solid var(--border-color);
+  padding: 14px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--primary-text);
+  border: 2px solid var(--border-color);
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+  min-height: 48px; /* Área de clique ideal para acessibilidade */
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==========================================================
+   6. ESTRUTURA PRINCIPAL (HEADER, MAIN E FOOTER)
+   ========================================================== */
+header,
+main,
+footer {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+header h1 {
+  font-size: 2.1em;
+  margin: 0 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 4px solid var(--primary-color);
+}
+
+/* Menu de Navegação */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+nav a {
+  display: inline-block;
+  color: var(--text-color);
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+  padding: 8px 4px;
+}
+
+nav a:hover {
+  color: var(--primary-color);
+}
+
+/* Cartões de Artigo */
+article {
+  background-color: var(--surface-color);
+  border: 2px solid var(--border-color);
+  padding: 28px;
+  margin-top: 24px;
+  border-radius: 10px;
+}
+
+article h2 {
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--primary-color);
+}
+
+body.high-contrast article h2 {
+  color: var(--text-color);
+}
+
+article p,
+article li {
+  max-width: 65ch; /* Largura ideal de linha para leitura confortável */
+}
+
+article ul {
+  padding-left: 24px;
+  margin: 0;
+}
+
+article li {
+  margin-bottom: 12px;
+}
+
+/* Rodapé */
+footer {
+  border-top: 2px solid var(--border-color);
+  margin-top: 48px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ==========================================================
+   7. RESPONSIVIDADE (CELULARES)
+   ========================================================== */
+@media (max-width: 600px) {
+  .accessibility-bar {
+    justify-content: stretch;
+  }
+
+  .accessibility-bar button {
+    flex: 1 1 auto;
+  }
+
+  article {
+    padding: 20px;
+  }
+}
